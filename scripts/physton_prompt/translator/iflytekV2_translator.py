@@ -1,4 +1,5 @@
-from scripts.physton_prompt.translator.base_tanslator import BaseTranslator
+import os
+import sys
 from datetime import datetime
 from wsgiref.handlers import format_date_time
 from time import mktime
@@ -8,7 +9,14 @@ import hmac
 from urllib.parse import urlencode
 import json
 import requests
-from scripts.physton_prompt.get_lang import get_lang
+
+# 将父目录添加到Python路径中
+current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
+
+from translator.base_tanslator import BaseTranslator
+from get_lang import get_lang
 
 
 class IflytekV2Translator(BaseTranslator):

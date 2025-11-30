@@ -1,5 +1,13 @@
-from scripts.physton_prompt.get_lang import get_lang
-from scripts.physton_prompt.get_translate_apis import unprotected_translate_api_config
+import os
+import sys
+
+# 将当前目录添加到Python路径中
+current_dir = os.path.dirname(os.path.abspath(__file__))
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
+
+from get_lang import get_lang
+from get_translate_apis import unprotected_translate_api_config
 
 
 def gen_openai(messages, api_config):

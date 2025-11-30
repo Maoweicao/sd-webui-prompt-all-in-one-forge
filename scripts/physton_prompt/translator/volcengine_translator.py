@@ -1,11 +1,19 @@
-from scripts.physton_prompt.translator.base_tanslator import BaseTranslator
+import os
+import sys
 import datetime
 import hashlib
 import hmac
 import requests
 import json
 from urllib.parse import quote
-from scripts.physton_prompt.get_lang import get_lang
+
+# 将父目录添加到Python路径中
+current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
+
+from translator.base_tanslator import BaseTranslator
+from get_lang import get_lang
 
 
 class VolcengineTranslator(BaseTranslator):

@@ -1,3 +1,5 @@
+import os
+import sys
 import hashlib
 import hmac
 import json
@@ -6,8 +8,13 @@ from datetime import datetime
 
 import requests
 
-from scripts.physton_prompt.get_lang import get_lang
-from scripts.physton_prompt.translator.base_tanslator import BaseTranslator
+# 将父目录添加到Python路径中
+current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
+
+from get_lang import get_lang
+from translator.base_tanslator import BaseTranslator
 
 
 class TencentTranslator(BaseTranslator):

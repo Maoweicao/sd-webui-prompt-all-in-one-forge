@@ -1,6 +1,13 @@
 import os
+import sys
 import time
-from scripts.physton_prompt.get_lang import get_lang
+
+# 将当前目录添加到Python路径中
+current_dir = os.path.dirname(os.path.abspath(__file__))
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
+
+from get_lang import get_lang
 
 model = None
 tokenizer = None

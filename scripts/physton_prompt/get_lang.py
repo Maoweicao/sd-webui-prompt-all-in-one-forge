@@ -1,5 +1,13 @@
-from scripts.physton_prompt.storage import Storage
-from scripts.physton_prompt.get_i18n import get_i18n
+import os
+import sys
+
+# 将当前目录添加到Python路径中
+current_dir = os.path.dirname(os.path.abspath(__file__))
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
+
+from storage import Storage
+from get_i18n import get_i18n
 
 
 def replace_vars(text, vars):
