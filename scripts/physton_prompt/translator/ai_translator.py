@@ -69,7 +69,17 @@ class AITranslator(BaseTranslator):
             raise Exception(error_msg)
         
         # 获取配置
-        platform = self.api_config.get('platform', self.platform)
+        # 根据当前 API key 判断平台
+        platform = self.platform
+        if self.api == 'openai':
+            platform = 'openai'
+        elif self.api == 'deepseek':
+            platform = 'deepseek'
+        elif self.api == 'cherryin':
+            platform = 'cherryin'
+        elif self.api == 'siliconflow':
+            platform = 'siliconflow'
+        
         api_base = self.api_config.get('api_base', '')
         api_key = self.api_config.get('api_key', '')
         
@@ -97,7 +107,17 @@ class AITranslator(BaseTranslator):
         """获取模型名称"""
         model = self.api_config.get('model', '')
         if not model:
-            platform = self.api_config.get('platform', self.platform)
+            # 根据当前 API key 判断平台
+            platform = self.platform
+            if self.api == 'openai':
+                platform = 'openai'
+            elif self.api == 'deepseek':
+                platform = 'deepseek'
+            elif self.api == 'cherryin':
+                platform = 'cherryin'
+            elif self.api == 'siliconflow':
+                platform = 'siliconflow'
+            
             if platform in self.PLATFORMS:
                 model = self.PLATFORMS[platform]['default_model']
         return model or 'gpt-4o-mini'

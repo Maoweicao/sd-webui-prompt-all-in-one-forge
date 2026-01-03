@@ -1980,6 +1980,7 @@
                     "config": [
                         {
                             "key": "api_base",
+                            "title_key": "api_base",
                             "title": "API Base",
                             "desc": "<ul><li>https://api.openai.com/v1</li><li>https://api.openai-proxy.com/v1</li><li>https://chatai.1rmb.tk/v1</li><li>...</li></ul>",
                             "type": "input",
@@ -1987,12 +1988,14 @@
                         },
                         {
                             "key": "api_key",
+                            "title_key": "api_key",
                             "title": "API Key",
                             "type": "input",
                             "privacy": true
                         },
                         {
                             "key": "model",
+                            "title_key": "model",
                             "title": "Model",
                             "type": "input",
                             "default": "gpt-3.5-turbo",
@@ -2070,18 +2073,21 @@
                     "config": [
                         {
                             "key": "api_base",
+                            "title_key": "api_base",
                             "title": "API Base",
                             "type": "input",
                             "default": "https://api.deepseek.com/v1"
                         },
                         {
                             "key": "api_key",
+                            "title_key": "api_key",
                             "title": "API Key",
                             "type": "input",
                             "privacy": true
                         },
                         {
                             "key": "model",
+                            "title_key": "model",
                             "title": "Model",
                             "type": "select_or_input",
                             "default": "deepseek-chat",
@@ -2142,18 +2148,21 @@
                     "config": [
                         {
                             "key": "api_base",
+                            "title_key": "api_base",
                             "title": "API Base",
                             "type": "input",
                             "default": "https://open.cherryin.ai/v1"
                         },
                         {
                             "key": "api_key",
+                            "title_key": "api_key",
                             "title": "API Key",
                             "type": "input",
                             "privacy": true
                         },
                         {
                             "key": "model",
+                            "title_key": "model",
                             "title": "Model",
                             "type": "select_or_input",
                             "default": "gpt-4o-mini",
@@ -2219,18 +2228,21 @@
                     "config": [
                         {
                             "key": "api_base",
+                            "title_key": "api_base",
                             "title": "API Base",
                             "type": "input",
                             "default": "https://api.siliconflow.cn/v1"
                         },
                         {
                             "key": "api_key",
+                            "title_key": "api_key",
                             "title": "API Key",
                             "type": "input",
                             "privacy": true
                         },
                         {
                             "key": "model",
+                            "title_key": "model",
                             "title": "Model",
                             "type": "select_or_input",
                             "default": "Qwen/Qwen2.5-7B-Instruct",

@@ -426,9 +426,13 @@ def on_app_started(_: gr.Blocks, app: FastAPI):
     try:
         translate_api = Storage.get('translateApi')
         if translate_api == 'mbart50':
-            mbart50_initialize()
-    except Exception:
-        pass
+            try:
+                mbart50_initialize()
+                print('[sd-webui-prompt-all-in-one] MBart50 model initialized successfully on startup.')
+            except Exception as e:
+                print(f'[sd-webui-prompt-all-in-one] Failed to initialize MBart50 model on startup: {str(e)}')
+    except Exception as e:
+        print(f'[sd-webui-prompt-all-in-one] Error checking translate API setting: {str(e)}')
 
 
 try:

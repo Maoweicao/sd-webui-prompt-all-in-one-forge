@@ -40,6 +40,13 @@
                             <select v-if="config.type == 'select'" v-model="config.value">
                                 <option v-for="option in config.options" :value="option">{{ option }}</option>
                             </select>
+                            <div v-if="config.type == 'select_or_input'" class="select-or-input-container">
+                                <select v-model="config.selectValue" @change="onSelectChange(config)">
+                                    <option value="">自定义输入...</option>
+                                    <option v-for="option in config.options" :value="option">{{ option }}</option>
+                                </select>
+                                <input type="text" v-model="config.value" @change="onChangeConfigValue(config)" :placeholder="'自定义模型名称'">
+                            </div>
                             <div v-if="config.desc" v-html="config.desc"></div>
                         </div>
                     </div>
@@ -207,6 +214,15 @@ export default {
                             } else {
                                 item.value = item.default || ''
                             }
+                            // 为 select_or_input 类型添加 selectValue 属性
+                            if (item.type === 'select_or_input') {
+                                // 检查当前值是否在选项中
+                                if (item.options && item.options.includes(item.value)) {
+                                    item.selectValue = item.value
+                                } else {
+                                    item.selectValue = ''
+                                }
+                            }
                             this.configs.push(item)
                         }
                         console.log(this.configs)
@@ -262,6 +278,13 @@ Github: {{name}}`
             if (config.type === 'input' && config.value === '' && config.default) {
                 config.value = config.default
             }
+        },
+        onSelectChange(config) {
+            // 当选择了预定义选项时，更新输入框的值
+            if (config.selectValue) {
+                config.value = config.selectValue
+            }
+            this.onChangeConfigValue(config)
         },
         refreshCSVs() {
             if (this.tagCompleteFilesLoading) return
@@ -376,3 +399,26 @@ Github: {{name}}`
     },
 }
 </script>
+
+<style scoped>
+.select-or-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.select-or-input-container select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.select-or-input-container input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+</style>

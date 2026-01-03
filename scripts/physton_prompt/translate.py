@@ -162,5 +162,11 @@ def translate(text, from_lang, to_lang, api, api_config=None):
     except Exception as e:
         # 返回详细的 traceback 信息
         error_traceback = traceback.format_exc()
-        error_message = f"{str(e)}\n\nTraceback:\n{error_traceback}"
-        return _translate_result(False, error_message, '')
+        error_message = str(e)
+        
+        # 如果是模型未初始化的错误，提供更友好的提示
+        if 'model_not_initialized' in error_message or 'Model is not initialized' in error_message:
+            error_message = "模型未初始化。请尝试以下步骤：\n1. 刷新页面\n2. 在翻译设置中重新选择 mbart50 翻译\n3. 如果问题仍然存在，请重启 Stable Diffusion WebUI"
+        
+        full_error_message = f"{error_message}\n\nTraceback:\n{error_traceback}"
+        return _translate_result(False, full_error_message, '')
