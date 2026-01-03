@@ -22,8 +22,15 @@ class CaiyunTranslator(BaseTranslator):
             return ''
         url = 'http://api.interpreter.caiyunai.com/v1/translator'
         token = self.api_config.get('token', '')
-        if not token:
-            raise Exception(get_lang('is_required', {'0': 'Token'}))
+        
+        # 检查是否需要API密钥
+        if self.needs_api_key():
+            if not token:
+                raise Exception(get_lang('is_required', {'0': 'Token'}))
+        else:
+            # 如果不需要API密钥，使用默认值
+            if not token:
+                token = "dummy-token"
 
         payload = {
             "source": text,

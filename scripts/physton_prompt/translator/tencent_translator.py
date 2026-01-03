@@ -25,12 +25,22 @@ class TencentTranslator(BaseTranslator):
         secret_id = self.api_config.get('secret_id', '')
         secret_key = self.api_config.get('secret_key', '')
         region = self.api_config.get('region', 'ap-shanghai')
-        if not secret_id:
-            raise Exception(get_lang('is_required', {'0': 'Secret ID'}))
-        if not secret_key:
-            raise Exception(get_lang('is_required', {'0': 'Secret Key'}))
-        if not region:
-            raise Exception(get_lang('is_required', {'0': 'Region'}))
+        
+        # 检查是否需要API密钥
+        if self.needs_api_key():
+            if not secret_id:
+                raise Exception(get_lang('is_required', {'0': 'Secret ID'}))
+            if not secret_key:
+                raise Exception(get_lang('is_required', {'0': 'Secret Key'}))
+            if not region:
+                raise Exception(get_lang('is_required', {'0': 'Region'}))
+        else:
+            # 如果不需要API密钥，使用默认值
+            if not secret_id:
+                secret_id = "dummy-secret-id"
+            if not secret_key:
+                secret_key = "dummy-secret-key"
+        
         return secret_id, secret_key, region
 
     def translate(self, text):

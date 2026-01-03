@@ -2021,6 +2021,301 @@
                     ]
                 },
                 {
+                    "key": "deepseek",
+                    "name": "[AI] Deepseek",
+                    "type": "ai_translate",
+                    "concurrent": 1,
+                    "support": {
+                        "zh_CN": "Simplified Chinese",
+                        "zh_HK": "Traditional Chinese in Hong Kong",
+                        "zh_TW": "Traditional Chinese in Taiwan",
+                        "en_US": "English",
+                        "en_GB": "English in the United Kingdom",
+                        "ja_JP": "Japanese",
+                        "ko_KR": "Korean",
+                        "fr_FR": "French",
+                        "de_DE": "German",
+                        "es_ES": "Spanish",
+                        "it_IT": "Italian",
+                        "pt_BR": "Portuguese in Brazil",
+                        "pt_PT": "Portuguese in Portugal",
+                        "ru_RU": "Russian",
+                        "ar_SA": "Arabic",
+                        "th_TH": "Thai",
+                        "vi_VN": "Vietnamese",
+                        "id_ID": "Indonesian",
+                        "ms_Latn_MY": "Malay",
+                        "nl_NL": "Dutch",
+                        "pl_PL": "Polish",
+                        "tr_TR": "Turkish",
+                        "uk_UA": "Ukrainian",
+                        "cs_CZ": "Czech",
+                        "da_DK": "Danish",
+                        "fi_FI": "Finnish",
+                        "el_GR": "Greek",
+                        "he_IL": "Hebrew",
+                        "hi_IN": "Hindi",
+                        "hu_HU": "Hungarian",
+                        "no_NO": "Norwegian",
+                        "ro_RO": "Romanian",
+                        "sk_SK": "Slovak",
+                        "sv_SE": "Swedish"
+                    },
+                    "help": [
+                        {
+                            "title": "[official] Deepseek API",
+                            "url": "https://platform.deepseek.com/"
+                        }
+                    ],
+                    "config": [
+                        {
+                            "key": "api_base",
+                            "title": "API Base",
+                            "type": "input",
+                            "default": "https://api.deepseek.com/v1"
+                        },
+                        {
+                            "key": "api_key",
+                            "title": "API Key",
+                            "type": "input",
+                            "privacy": true
+                        },
+                        {
+                            "key": "model",
+                            "title": "Model",
+                            "type": "select_or_input",
+                            "default": "deepseek-chat",
+                            "options": [
+                                "deepseek-chat",
+                                "deepseek-reasoner"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "key": "cherryin",
+                    "name": "[AI] CherryIn",
+                    "type": "ai_translate",
+                    "concurrent": 1,
+                    "support": {
+                        "zh_CN": "Simplified Chinese",
+                        "zh_HK": "Traditional Chinese in Hong Kong",
+                        "zh_TW": "Traditional Chinese in Taiwan",
+                        "en_US": "English",
+                        "en_GB": "English in the United Kingdom",
+                        "ja_JP": "Japanese",
+                        "ko_KR": "Korean",
+                        "fr_FR": "French",
+                        "de_DE": "German",
+                        "es_ES": "Spanish",
+                        "it_IT": "Italian",
+                        "pt_BR": "Portuguese in Brazil",
+                        "pt_PT": "Portuguese in Portugal",
+                        "ru_RU": "Russian",
+                        "ar_SA": "Arabic",
+                        "th_TH": "Thai",
+                        "vi_VN": "Vietnamese",
+                        "id_ID": "Indonesian",
+                        "ms_Latn_MY": "Malay",
+                        "nl_NL": "Dutch",
+                        "pl_PL": "Polish",
+                        "tr_TR": "Turkish",
+                        "uk_UA": "Ukrainian",
+                        "cs_CZ": "Czech",
+                        "da_DK": "Danish",
+                        "fi_FI": "Finnish",
+                        "el_GR": "Greek",
+                        "he_IL": "Hebrew",
+                        "hi_IN": "Hindi",
+                        "hu_HU": "Hungarian",
+                        "no_NO": "Norwegian",
+                        "ro_RO": "Romanian",
+                        "sk_SK": "Slovak",
+                        "sv_SE": "Swedish"
+                    },
+                    "help": [
+                        {
+                            "title": "[official] CherryIn API",
+                            "url": "https://open.cherryin.ai/"
+                        }
+                    ],
+                    "config": [
+                        {
+                            "key": "api_base",
+                            "title": "API Base",
+                            "type": "input",
+                            "default": "https://open.cherryin.ai/v1"
+                        },
+                        {
+                            "key": "api_key",
+                            "title": "API Key",
+                            "type": "input",
+                            "privacy": true
+                        },
+                        {
+                            "key": "model",
+                            "title": "Model",
+                            "type": "select_or_input",
+                            "default": "gpt-4o-mini",
+                            "options": [
+                                "gpt-4o-mini",
+                                "gpt-4o",
+                                "gpt-4-turbo",
+                                "claude-3-5-sonnet-20241022",
+                                "claude-3-5-haiku-20241022",
+                                "deepseek-chat",
+                                "deepseek-reasoner"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "key": "siliconflow",
+                    "name": "[AI] 硅基流动 SiliconFlow",
+                    "type": "ai_translate",
+                    "concurrent": 1,
+                    "support": {
+                        "zh_CN": "Simplified Chinese",
+                        "zh_HK": "Traditional Chinese in Hong Kong",
+                        "zh_TW": "Traditional Chinese in Taiwan",
+                        "en_US": "English",
+                        "en_GB": "English in the United Kingdom",
+                        "ja_JP": "Japanese",
+                        "ko_KR": "Korean",
+                        "fr_FR": "French",
+                        "de_DE": "German",
+                        "es_ES": "Spanish",
+                        "it_IT": "Italian",
+                        "pt_BR": "Portuguese in Brazil",
+                        "pt_PT": "Portuguese in Portugal",
+                        "ru_RU": "Russian",
+                        "ar_SA": "Arabic",
+                        "th_TH": "Thai",
+                        "vi_VN": "Vietnamese",
+                        "id_ID": "Indonesian",
+                        "ms_Latn_MY": "Malay",
+                        "nl_NL": "Dutch",
+                        "pl_PL": "Polish",
+                        "tr_TR": "Turkish",
+                        "uk_UA": "Ukrainian",
+                        "cs_CZ": "Czech",
+                        "da_DK": "Danish",
+                        "fi_FI": "Finnish",
+                        "el_GR": "Greek",
+                        "he_IL": "Hebrew",
+                        "hi_IN": "Hindi",
+                        "hu_HU": "Hungarian",
+                        "no_NO": "Norwegian",
+                        "ro_RO": "Romanian",
+                        "sk_SK": "Slovak",
+                        "sv_SE": "Swedish"
+                    },
+                    "help": [
+                        {
+                            "title": "[official] SiliconFlow API",
+                            "url": "https://siliconflow.cn/"
+                        }
+                    ],
+                    "config": [
+                        {
+                            "key": "api_base",
+                            "title": "API Base",
+                            "type": "input",
+                            "default": "https://api.siliconflow.cn/v1"
+                        },
+                        {
+                            "key": "api_key",
+                            "title": "API Key",
+                            "type": "input",
+                            "privacy": true
+                        },
+                        {
+                            "key": "model",
+                            "title": "Model",
+                            "type": "select_or_input",
+                            "default": "Qwen/Qwen2.5-7B-Instruct",
+                            "options": [
+                                "Qwen/Qwen2.5-7B-Instruct",
+                                "Qwen/Qwen2.5-14B-Instruct",
+                                "Qwen/Qwen2.5-32B-Instruct",
+                                "Qwen/Qwen2.5-72B-Instruct",
+                                "deepseek-ai/DeepSeek-V3",
+                                "deepseek-ai/DeepSeek-R1",
+                                "THUDM/glm-4-9b-chat",
+                                "01-ai/Yi-1.5-9B-Chat"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "key": "custom_ai",
+                    "name": "[AI] Custom OpenAI Compatible",
+                    "type": "ai_translate",
+                    "concurrent": 1,
+                    "support": {
+                        "zh_CN": "Simplified Chinese",
+                        "zh_HK": "Traditional Chinese in Hong Kong",
+                        "zh_TW": "Traditional Chinese in Taiwan",
+                        "en_US": "English",
+                        "en_GB": "English in the United Kingdom",
+                        "ja_JP": "Japanese",
+                        "ko_KR": "Korean",
+                        "fr_FR": "French",
+                        "de_DE": "German",
+                        "es_ES": "Spanish",
+                        "it_IT": "Italian",
+                        "pt_BR": "Portuguese in Brazil",
+                        "pt_PT": "Portuguese in Portugal",
+                        "ru_RU": "Russian",
+                        "ar_SA": "Arabic",
+                        "th_TH": "Thai",
+                        "vi_VN": "Vietnamese",
+                        "id_ID": "Indonesian",
+                        "ms_Latn_MY": "Malay",
+                        "nl_NL": "Dutch",
+                        "pl_PL": "Polish",
+                        "tr_TR": "Turkish",
+                        "uk_UA": "Ukrainian",
+                        "cs_CZ": "Czech",
+                        "da_DK": "Danish",
+                        "fi_FI": "Finnish",
+                        "el_GR": "Greek",
+                        "he_IL": "Hebrew",
+                        "hi_IN": "Hindi",
+                        "hu_HU": "Hungarian",
+                        "no_NO": "Norwegian",
+                        "ro_RO": "Romanian",
+                        "sk_SK": "Slovak",
+                        "sv_SE": "Swedish"
+                    },
+                    "help": [
+                        {
+                            "title": "Any OpenAI Compatible API",
+                            "url": "https://platform.openai.com/docs/api-reference"
+                        }
+                    ],
+                    "config": [
+                        {
+                            "key": "api_base",
+                            "title": "API Base",
+                            "type": "input",
+                            "default": ""
+                        },
+                        {
+                            "key": "api_key",
+                            "title": "API Key",
+                            "type": "input",
+                            "privacy": true
+                        },
+                        {
+                            "key": "model",
+                            "title": "Model",
+                            "type": "select_or_input",
+                            "default": ""
+                        }
+                    ]
+                },
+                {
                     "key": "microsoft",
                     "name": "[ApiKey] Microsoft ﹍﹍﹍﹍﹍﹍﹍ [2,000,000 chars/month]",
                     "concurrent": 999,

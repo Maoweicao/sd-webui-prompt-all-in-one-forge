@@ -26,8 +26,15 @@ class OpenaiTranslator(BaseTranslator):
         openai.api_base = self.api_config.get('api_base', 'https://api.openai.com/v1')
         openai.api_key = self.api_config.get('api_key', '')
         model = self.api_config.get('model', 'gpt-3.5-turbo')
-        if not openai.api_key:
-            raise Exception(get_lang('is_required', {'0': 'API Key'}))
+        
+        # 检查是否需要API密钥
+        if self.needs_api_key():
+            if not openai.api_key:
+                raise Exception(get_lang('is_required', {'0': 'API Key'}))
+        else:
+            # 如果不需要API密钥，使用默认值
+            if not openai.api_key:
+                openai.api_key = "dummy-api-key"
 
         body = []
         if isinstance(text, list):

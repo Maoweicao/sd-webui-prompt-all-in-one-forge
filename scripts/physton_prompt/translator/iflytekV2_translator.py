@@ -27,14 +27,25 @@ class IflytekV2Translator(BaseTranslator):
         if not text:
             return ''
         app_id = self.api_config.get('app_id', '')
-        if not app_id:
-            raise Exception(get_lang('is_required', {'0': 'APP ID'}))
         api_secret = self.api_config.get('api_secret', '')
-        if not api_secret:
-            raise Exception(get_lang('is_required', {'0': 'API Secret'}))
         api_key = self.api_config.get('api_key', '')
-        if not api_key:
-            raise Exception(get_lang('is_required', {'0': 'API Key'}))
+        
+        # 检查是否需要API密钥
+        if self.needs_api_key():
+            if not app_id:
+                raise Exception(get_lang('is_required', {'0': 'APP ID'}))
+            if not api_secret:
+                raise Exception(get_lang('is_required', {'0': 'API Secret'}))
+            if not api_key:
+                raise Exception(get_lang('is_required', {'0': 'API Key'}))
+        else:
+            # 如果不需要API密钥，使用默认值
+            if not app_id:
+                app_id = "dummy-app-id"
+            if not api_secret:
+                api_secret = "dummy-api-secret"
+            if not api_key:
+                api_key = "dummy-api-key"
 
         response = translate(text, From=self.from_lang, To=self.to_lang, APPId=app_id, APISecret=api_secret, APIKey=api_key)
         if response.status_code != 200:

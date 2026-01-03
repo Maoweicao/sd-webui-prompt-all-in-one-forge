@@ -58,6 +58,17 @@ class BaseTranslator(ABC):
             concurrent = self.api_item['concurrent']
         return concurrent
 
+    def needs_api_key(self):
+        """检查翻译器是否需要API密钥"""
+        # 检查翻译器所在的组类型
+        apis = get_translate_apis()
+        for group in apis['apis']:
+            if 'children' in group:
+                for item in group['children']:
+                    if item['key'] == self.api:
+                        return group.get('type') == 'need_api_key'
+        return False  # 默认认为不需要API密钥
+
     @abstractmethod
     def translate(self, text):
         pass

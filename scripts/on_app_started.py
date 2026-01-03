@@ -23,10 +23,12 @@ from physton_prompt.styles import get_style_full_path, get_extension_css_list
 from physton_prompt.get_extra_networks import get_extra_networks
 from physton_prompt.packages import get_packages_state, install_package
 from physton_prompt.gen_openai import gen_openai
+from physton_prompt.gen_ai import gen_ai
 from physton_prompt.get_lang import get_lang
 from physton_prompt.get_version import get_git_commit_version, get_git_remote_versions, get_latest_version
 from physton_prompt.mbart50 import initialize as mbart50_initialize, translate as mbart50_translate
 from physton_prompt.get_group_tags import get_group_tags
+from physton_prompt.translator.ai_translator import AITranslator
 
 try:
     from modules.shared import cmd_opts
@@ -375,6 +377,15 @@ def on_app_started(_: gr.Blocks, app: FastAPI):
     async def _get_extra_networks():
         return {"extra_networks": get_extra_networks()}
 
+    @app.post("/physton_prompt/get_ai_models")
+    async def _get_ai_models(request: Request):
+        data = await request.json()
+        if 'api_base' not in data:
+            return {"success": False, "message": get_lang('is_required', {'0': 'api_base'})}
+        if 'api_key' not in data:
+            return {"success": False, "message": get_lang('is_required', {'0': 'api_key'})}
+        return AITranslator.get_models(data['api_base'], data['api_key'])
+
     @app.post("/physton_prompt/gen_openai")
     async def _gen_openai(request: Request):
         data = await request.json()
@@ -384,6 +395,19 @@ def on_app_started(_: gr.Blocks, app: FastAPI):
             return {"success": False, "message": get_lang('is_required', {'0': 'api_config'})}
         try:
             return {"success": True, 'result': gen_openai(data['messages'], data['api_config'])}
+        except Exception as e:
+            return {"success": False, 'message': str(e)}
+
+    @app.post("/physton_prompt/gen_ai")
+    async def _gen_ai(request: Request):
+        data = await request.json()
+        if 'messages' not in data:
+            return {"success": False, "message": get_lang('is_required', {'0': 'messages'})}
+        if 'api_config' not in data:
+            return {"success": False, "message": get_lang('is_required', {'0': 'api_config'})}
+        platform = data.get('platform', 'openai')
+        try:
+            return {"success": True, 'result': gen_ai(data['messages'], data['api_config'], platform)}
         except Exception as e:
             return {"success": False, 'message': str(e)}
 

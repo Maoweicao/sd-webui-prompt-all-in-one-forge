@@ -20,12 +20,22 @@ class AlibabaTranslator(BaseTranslator):
         access_key_id = self.api_config.get('access_key_id', '')
         access_key_secret = self.api_config.get('access_key_secret', '')
         region = self.api_config.get('region', 'cn-shanghai')
-        if not access_key_id:
-            raise Exception(get_lang('is_required', {'0': 'Access Key ID'}))
-        if not access_key_secret:
-            raise Exception(get_lang('is_required', {'0': 'Access Key Secret'}))
-        if not region:
-            raise Exception(get_lang('is_required', {'0': 'Region ID'}))
+        
+        # 检查是否需要API密钥
+        if self.needs_api_key():
+            if not access_key_id:
+                raise Exception(get_lang('is_required', {'0': 'Access Key ID'}))
+            if not access_key_secret:
+                raise Exception(get_lang('is_required', {'0': 'Access Key Secret'}))
+            if not region:
+                raise Exception(get_lang('is_required', {'0': 'Region ID'}))
+        else:
+            # 如果不需要API密钥，使用默认值
+            if not access_key_id:
+                access_key_id = "dummy-key-id"
+            if not access_key_secret:
+                access_key_secret = "dummy-key-secret"
+        
         return access_key_id, access_key_secret, region
 
     def translate(self, text):

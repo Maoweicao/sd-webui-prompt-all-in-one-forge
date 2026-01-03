@@ -25,10 +25,20 @@ class MicrosoftTranslator(BaseTranslator):
         url = 'https://api.cognitive.microsofttranslator.com/translate'
         api_key = self.api_config.get('api_key', '')
         region = self.api_config.get('region', '')
-        if not api_key:
-            raise Exception(get_lang('is_required', {'0': 'API Key'}))
-        if not region:
-            raise Exception(get_lang('is_required', {'0': 'Region'}))
+        
+        # 检查是否需要API密钥
+        if self.needs_api_key():
+            if not api_key:
+                raise Exception(get_lang('is_required', {'0': 'API Key'}))
+            if not region:
+                raise Exception(get_lang('is_required', {'0': 'Region'}))
+        else:
+            # 如果不需要API密钥，使用默认值
+            if not api_key:
+                api_key = "dummy-api-key"
+            if not region:
+                region = "global"
+        
         params = {
             'api-version': '3.0',
             'from': self.from_lang,

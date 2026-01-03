@@ -30,10 +30,20 @@ class YoudaoTranslator(BaseTranslator):
             url = "https://openapi.youdao.com/api"
         app_id = self.api_config.get('app_id', '')
         app_secret = self.api_config.get('app_secret', '')
-        if not app_id:
-            raise Exception(get_lang('is_required', {'0': 'App ID'}))
-        if not app_secret:
-            raise Exception(get_lang('is_required', {'0': 'App Secret'}))
+        
+        # 检查是否需要API密钥
+        if self.needs_api_key():
+            if not app_id:
+                raise Exception(get_lang('is_required', {'0': 'App ID'}))
+            if not app_secret:
+                raise Exception(get_lang('is_required', {'0': 'App Secret'}))
+        else:
+            # 如果不需要API密钥，使用默认值
+            if not app_id:
+                app_id = "dummy-app-id"
+            if not app_secret:
+                app_secret = "dummy-app-secret"
+        
         curtime = str(int(time.time()))
         salt = random.randint(32768, 65536)
         if isinstance(text, list):

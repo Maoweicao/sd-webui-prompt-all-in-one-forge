@@ -23,10 +23,20 @@ class BaiduTranslator(BaseTranslator):
         url = "https://fanyi-api.baidu.com/api/trans/vip/translate"
         app_id = self.api_config.get('app_id', '')
         app_secret = self.api_config.get('app_secret', '')
-        if not app_id:
-            raise Exception(get_lang('is_required', {'0': 'APP ID'}))
-        if not app_secret:
-            raise Exception(get_lang('is_required', {'0': 'APP Secret'}))
+        
+        # 检查是否需要API密钥
+        if self.needs_api_key():
+            if not app_id:
+                raise Exception(get_lang('is_required', {'0': 'APP ID'}))
+            if not app_secret:
+                raise Exception(get_lang('is_required', {'0': 'APP Secret'}))
+        else:
+            # 如果不需要API密钥，使用默认值
+            if not app_id:
+                app_id = "dummy-app-id"
+            if not app_secret:
+                app_secret = "dummy-app-secret"
+        
         salt = random.randint(32768, 65536)
         send_text = text
         if isinstance(text, list):

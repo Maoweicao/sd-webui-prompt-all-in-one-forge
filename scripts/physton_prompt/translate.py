@@ -2,6 +2,7 @@ import os
 import sys
 import json
 import hashlib
+import traceback
 
 # 将当前目录添加到Python路径中
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -28,6 +29,7 @@ from translator.volcengine_translator import VolcengineTranslator
 from translator.iflytekV1_translator import IflytekV1Translator
 from translator.iflytekV2_translator import IflytekV2Translator
 from translator.mbart50_translator import MBart50Translator
+from translator.ai_translator import AITranslator
 
 caches = {}
 
@@ -123,6 +125,10 @@ def translate(text, from_lang, to_lang, api, api_config=None):
             translator = IflytekV2Translator()
         elif api == 'mbart50':
             translator = MBart50Translator()
+        elif 'type' in find and find['type'] == 'ai_translate':
+            # 统一的 AI 翻译接口 (Deepseek, CherryIn, SiliconFlow, Custom)
+            translator = AITranslator(api)
+            translator.set_platform(api)
         elif 'type' in find and find['type'] == 'translators':
             translator = TranslatorsTranslator(api)
             translator.set_translator(find['translator'])
@@ -154,5 +160,7 @@ def translate(text, from_lang, to_lang, api, api_config=None):
             caches[_cache_name(text)] = translated_text
             return _translate_result(True, '', translated_text)
     except Exception as e:
-        # print(e)
-        return _translate_result(False, str(e), '')
+        # 返回详细的 traceback 信息
+        error_traceback = traceback.format_exc()
+        error_message = f"{str(e)}\n\nTraceback:\n{error_traceback}"
+        return _translate_result(False, error_message, '')

@@ -51,6 +51,8 @@ def privacy_translate_api_config(data_key, data):
     api = None
     if data_key == 'chatgpt_key':
         api = 'openai'
+    elif data_key == 'ai_generate_key':
+        api = 'openai'
     else:
         start = 'translate_api.'
         if not data_key.startswith(start):
@@ -84,6 +86,8 @@ def privacy_translate_api_config(data_key, data):
 def unprotected_translate_api_config(data_key, data):
     api = None
     if data_key == 'chatgpt_key':
+        api = 'openai'
+    elif data_key == 'ai_generate_key':
         api = 'openai'
     else:
         start = 'translate_api.'

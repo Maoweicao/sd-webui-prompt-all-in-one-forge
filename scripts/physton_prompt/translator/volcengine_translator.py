@@ -30,10 +30,19 @@ class VolcengineTranslator(BaseTranslator):
         access_key_id = self.api_config.get('access_key_id', '')
         access_key_secret = self.api_config.get('access_key_secret', '')
         region = self.api_config.get('region', 'cn-north-1')
-        if not access_key_id:
-            raise Exception(get_lang('is_required', {'0': 'Access Key ID'}))
-        if not access_key_secret:
-            raise Exception(get_lang('is_required', {'0': 'Secret Access Key'}))
+        
+        # 检查是否需要API密钥
+        if self.needs_api_key():
+            if not access_key_id:
+                raise Exception(get_lang('is_required', {'0': 'Access Key ID'}))
+            if not access_key_secret:
+                raise Exception(get_lang('is_required', {'0': 'Secret Access Key'}))
+        else:
+            # 如果不需要API密钥，使用默认值
+            if not access_key_id:
+                access_key_id = "dummy-access-key-id"
+            if not access_key_secret:
+                access_key_secret = "dummy-access-key-secret"
 
         if isinstance(text, list):
             texts = text

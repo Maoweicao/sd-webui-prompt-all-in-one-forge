@@ -20,12 +20,23 @@ class AmazonTranslator(BaseTranslator):
         api_key_id = self.api_config.get('api_key_id', '')
         api_key_secret = self.api_config.get('api_key_secret', '')
         region = self.api_config.get('region', '')
-        if not api_key_id:
-            raise Exception(get_lang('is_required', {'0': 'API Key ID'}))
-        if not api_key_secret:
-            raise Exception(get_lang('is_required', {'0': 'API Key Secret'}))
-        if not region:
-            raise Exception(get_lang('is_required', {'0': 'Region'}))
+        
+        # 检查是否需要API密钥
+        if self.needs_api_key():
+            if not api_key_id:
+                raise Exception(get_lang('is_required', {'0': 'API Key ID'}))
+            if not api_key_secret:
+                raise Exception(get_lang('is_required', {'0': 'API Key Secret'}))
+            if not region:
+                raise Exception(get_lang('is_required', {'0': 'Region'}))
+        else:
+            # 如果不需要API密钥，使用默认值
+            if not api_key_id:
+                api_key_id = "dummy-api-key-id"
+            if not api_key_secret:
+                api_key_secret = "dummy-api-key-secret"
+            if not region:
+                region = "us-east-1"
 
         import boto3
         translate = boto3.client(service_name='translate', region_name=region, use_ssl=True,

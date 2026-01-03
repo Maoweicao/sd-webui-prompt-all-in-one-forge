@@ -22,8 +22,15 @@ class YandexTranslator(BaseTranslator):
             else:
                 return ''
         api_key = self.api_config.get('api_key', '')
-        if not api_key:
-            raise Exception(get_lang('is_required', {'0': 'API Key'}))
+        
+        # 检查是否需要API密钥
+        if self.needs_api_key():
+            if not api_key:
+                raise Exception(get_lang('is_required', {'0': 'API Key'}))
+        else:
+            # 如果不需要API密钥，使用默认值
+            if not api_key:
+                api_key = "dummy-api-key"
 
         if isinstance(text, list):
             texts = text
